@@ -120,3 +120,77 @@
     content: ""; }
   .offline-doc .page-header:before {
     background-color: rgba(0, 0, 0, 0.8); }
+
+    .full-page.lock-page, .full-page.login-page, .full-page.pricing-page, .full-page.register-page {
+        height: 100vh;
+        background: -webkit-radial-gradient(#1e1e2f,#1e1e24);
+        background: radial-gradient(#1e1e2f,#1e1e24);
+    }
+    .full-page>.content {
+        padding-top: 150px;
+    }
+
+    .full-page>.content, .full-page>.footer {
+        position: relative;
+        z-index: 4;
+    }
+    .login-page .card-login.card-white {
+    background: #fff;
+}
+.card.card-white {
+    background: #fff;
+}
+.login-page .card-login {
+    border-radius: .4285rem;
+    padding-bottom: .7rem;
+}
+.card .card-header:not([data-background-color]) {
+    background-color: initial;
+}
+.login-page .card-login .card-header {
+    padding: 0 0 100px;
+    overflow: hidden;
+}
+.card .card-header {
+    padding: 15px 15px 0;
+    border: 0;
+    color: hsla(0,0%,100%,.8);
+}
+.card-header:first-child {
+    border-radius: .2232rem .2232rem 0 0;
+}
+.card-header {
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 0;
+    background-color: #f6f9fc;
+    border-bottom: .0625rem solid rgba(34,42,66,.05);
+}
+@media (max-width: 767.98px)
+.login-page .card-login .card-header img {
+    width: 70%;
+}
+.login-page .card-login .card-header img {
+    position: absolute;
+}
+.login-page .card-login.card-white .card-header .card-title {
+    color: #fff;
+}
+.login-page .card-login .card-header .card-title {
+    position: relative;
+    font-size: 5em;
+    font-weight: 900;
+    color: #222a42;
+    text-transform: lowercase;
+    margin-left: -5px;
+    z-index: 1;
+}
+.card.card-white .card-title {
+    color: #222a42;
+}
+.card .card-header .card-title {
+    color: #fff;
+    font-weight: 100;
+}
+.card .card-title {
+    margin-bottom: .75rem;
+}
