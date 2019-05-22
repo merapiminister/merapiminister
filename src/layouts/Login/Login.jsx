@@ -1,9 +1,30 @@
 import React from "react";
-import { Route, Switch } from "react-router-dom";
+import {
+  UncontrolledAlert,
+} from "reactstrap";
+
 import Img from 'assets/img/login.png'
+import {connect} from 'react-redux'
+import {signIn} from '../../store/actions/authActions'
 
 class Login extends React.Component {
+  state = {
+    email : '',
+    password : ''
+  }
+  handleChange = (e) => {
+    this.setState({
+      [e.target.id]: e.target.value
+    });
+  }
+
+  handleSubmit = (e) => {
+      e.preventDefault();
+      this.props.signIn(this.state);
+  }
+
   render() {
+    const {authError} = this.props;
     return (
       <>
         <div className="wrapper wrapper-full-page">
@@ -11,7 +32,16 @@ class Login extends React.Component {
                 <div className="content">
                     <div className="container">
                           <div className="ml-auto mr-auto col-md-6 col-lg-4">
-                                <form className="form">
+                          {
+                            authError ?
+                            <UncontrolledAlert color="danger">
+                              <span>
+                                <b>Maaf Login Gagal</b>
+                              </span>
+                            </UncontrolledAlert>
+                            : null
+                          }
+                                <form className="form" onSubmit={this.handleSubmit}>
                                       <div className="card-login card-white card">
                                             <div className="card-header">
                                                 <img alt="..." src={Img}/>
@@ -19,13 +49,14 @@ class Login extends React.Component {
                                                 </h1>
                                             </div>
                                             <div className="card-body">
+
                                                 <div className="input-group">
                                                     <div className="input-group-prepend">
                                                         <span className="input-group-text">
                                                             <i className="tim-icons icon-email-85"></i>
                                                         </span>
                                                     </div>
-                                                    <input placeholder="Email" type="text" className="form-control"/>
+                                                    <input placeholder="Email" type="text" className="form-control" id="email" onChange={this.handleChange}/>
                                                 </div>
                                                 <div className="input-group">
                                                     <div className="input-group-prepend">
@@ -33,11 +64,11 @@ class Login extends React.Component {
                                                         <i className="tim-icons icon-lock-circle"></i>
                                                       </span>
                                                     </div>
-                                                    <input placeholder="Password" type="text" className="form-control"/>
+                                                    <input placeholder="Password" type="password" className="form-control" id="password" onChange={this.handleChange}/>
                                                   </div>
                                             </div>
                                             <div className="card-footer">
-                                                <a href="#pablo" className="mb-3 btn btn-primary btn-lg btn-block">Get Started</a>
+                                                <input  className="mb-3 btn btn-primary btn-lg btn-block" type="submit" value="Masuk" onSubmit={this.handleSubmit}/>
                                             <div className="pull-right">
                                                 <h6>
                                                 <a className="link footer-link" href="#pablo">Need Help?</a>
@@ -56,5 +87,15 @@ class Login extends React.Component {
     );
   }
 }
-
-export default Login;
+const mapStatetoProps = (state) => {
+  console.log(state);
+  return{
+    authError: state.auth.authError
+  }
+}
+const mapDispatchtoProps = (dispatch) =>{
+  return{
+    signIn: (creds) => dispatch(signIn(creds))
+  }
+}
+export default connect(mapStatetoProps, mapDispatchtoProps)(Login);
