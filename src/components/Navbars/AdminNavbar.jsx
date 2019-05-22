@@ -19,6 +19,8 @@ import {
   Container,
   Modal
 } from "reactstrap";
+import {connect} from 'react-redux';
+import {signOut} from '../../store/actions/authActions';
 
 class AdminNavbar extends React.Component {
   constructor(props) {
@@ -186,7 +188,7 @@ class AdminNavbar extends React.Component {
                     </NavLink>
                     <DropdownItem divider tag="li" />
                     <NavLink tag="li">
-                      <DropdownItem className="nav-item">Log out</DropdownItem>
+                      <DropdownItem className="nav-item" onClick={this.props.signOut}>Log out</DropdownItem>
                     </NavLink>
                   </DropdownMenu>
                 </UncontrolledDropdown>
@@ -217,5 +219,9 @@ class AdminNavbar extends React.Component {
     );
   }
 }
-
-export default AdminNavbar;
+const mapDispatchtoProps = (dispatch) => {
+  return {
+    signOut: () => dispatch(signOut())
+  }
+}
+export default connect(null, mapDispatchtoProps)(AdminNavbar);

@@ -1,5 +1,5 @@
 const initState = {
-  authError: null
+  authError: "kosong"
 }
 
 const authReducer = (state = initState, action) => {
@@ -7,12 +7,17 @@ const authReducer = (state = initState, action) => {
     case 'LOGIN_ERROR':
     console.log('login error');
     return {
-      ...state, authError: 'Login Failed'
+      ...state, authError: 'fail'
     }
     case 'LOGIN_SUCCESS':
     console.log('login success');
     return{
-      ...state, authError: null
+      ...state, authError: "login"
+    }
+    case 'LOGOUT_SUCCESS':
+    console.log('logout success');
+    return {
+      ...state, authError: "kosong"
     }
     default:
     return state;

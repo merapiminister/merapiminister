@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
 // javascript plugin used to create scrollbars on windows
 import PerfectScrollbar from "perfect-scrollbar";
 
@@ -8,7 +8,8 @@ import AdminNavbar from "components/Navbars/AdminNavbar.jsx";
 import Footer from "components/Footer/Footer.jsx";
 import Sidebar from "components/Sidebar/Sidebar.jsx";
 import FixedPlugin from "components/FixedPlugin/FixedPlugin.jsx";
-
+import {connect} from 'react-redux';
+import {signOut} from '../../store/actions/authActions';
 import routes from "routes.js";
 
 import logo from "assets/img/merapi-logo.jpg";
@@ -62,7 +63,7 @@ class Admin extends React.Component {
   };
   getRoutes = routes => {
     return routes.map((prop, key) => {
-      if (prop.layout === "/admin") {
+      if (prop.layout === "/admin" ) {
         return (
           <Route
             path={prop.layout + prop.path}
@@ -91,6 +92,7 @@ class Admin extends React.Component {
     return "Brand";
   };
   render() {
+    const {auth} = this.props;
     return (
       <>
         <div className="wrapper">
@@ -132,4 +134,10 @@ class Admin extends React.Component {
   }
 }
 
-export default Admin;
+const mapStatetoProps = (state) =>{
+  return {
+    auth : state.auth.authError
+  }
+}
+
+export default connect(mapStatetoProps)(Admin);

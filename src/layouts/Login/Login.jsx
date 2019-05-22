@@ -22,9 +22,11 @@ class Login extends React.Component {
       e.preventDefault();
       this.props.signIn(this.state);
   }
+  componentDidMount(){
 
+  }
   render() {
-    const {authError} = this.props;
+    const {authError, authenticated} = this.props;
     return (
       <>
         <div className="wrapper wrapper-full-page">
@@ -33,7 +35,7 @@ class Login extends React.Component {
                     <div className="container">
                           <div className="ml-auto mr-auto col-md-6 col-lg-4">
                           {
-                            authError ?
+                            authError == "fail"?
                             <UncontrolledAlert color="danger">
                               <span>
                                 <b>Maaf Login Gagal</b>
